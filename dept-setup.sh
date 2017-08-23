@@ -1,12 +1,13 @@
 #!/bin/sh
 
-# New Ubuntu 16.04 Software Setup Install 
+# New Xubuntu 16.04.3 LTS 
+# Software Setup Install
 
 # Copy Folder
 # cp /media/student/B9ED-7B09/143 ~/Desktop
 
 #--------------------------------------------------------------------------------------------
-# Qt install
+# Qt-creator 5 install
 # Ref: https://wiki.qt.io/Install_Qt_5_on_Ubuntu
 
 # Online option for Qt 5.9
@@ -49,7 +50,7 @@ update-mime-database /usr/share/mime;
 #--------------------------------------------------------------------------------------------
 
 #--------------------------------------------------------------------------------------------
-# Sublime install
+# Sublime text 3 install
 
 # From deb:
 apt install -y /home/student/Desktop/143/sublime-text_build-3126_amd64.deb
@@ -113,7 +114,7 @@ apt install -y /home/student/Desktop/143/openjdk-9-jdk_9~b114-0ubuntu1_amd64.deb
 #--------------------------------------------------------------------------------------------
 
 #--------------------------------------------------------------------------------------------
-# Virtual Box
+# Virtual Box 5.1
 apt install -y /home/student/Desktop/143/virtualbox-5.1_5.1.26-117224~Ubuntu~xenial_amd64.deb
 
 # Add extension pack
@@ -254,8 +255,50 @@ chown -R student:student /home/student/Documents/nand2tetris
 #--------------------------------------------------------------------------------------------
 
 #--------------------------------------------------------------------------------------------
+# Tmux 2.1
+apt install -y /home/student/Desktop/143/tmux_2.1-3build1_amd64.deb
+#--------------------------------------------------------------------------------------------
+
+#--------------------------------------------------------------------------------------------
+# Ascii 3.15
+apt install -y /home/student/Desktop/143/ascii_3.15-1_amd64.deb
+#--------------------------------------------------------------------------------------------
+
+#--------------------------------------------------------------------------------------------
+# Bless 0.6.0
+apt install -y /home/student/Desktop/143/bless_0.6.0-5_all.deb
+#--------------------------------------------------------------------------------------------
+
+#--------------------------------------------------------------------------------------------
+# Open CV 3.3
+# From http://opencv.org/releases.html
+
+# installing requirements 
+# apt install -y build-essential cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev python-dev python-numpy libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libjasper-dev libdc1394-22-dev
+
+# Following this guide: http://docs.opencv.org/trunk/d7/d9f/tutorial_linux_install.html
+
+# unzip opencv-3.3.0
+# cd ~/opencv
+# mkdir build
+# cd build
+
+# Must configure make options
+# cmake -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=/usr/local .. 
+
+# PYTHON2(3)_EXECUTABLE = <path to python>
+# PYTHON_INCLUDE_DIR = /usr/include/python<version>
+# PYTHON_INCLUDE_DIR2 = /usr/include/x86_64-linux-gnu/python<version>
+# PYTHON_LIBRARY = /usr/lib/x86_64-linux-gnu/libpython<version>.so
+# PYTHON2(3)_NUMPY_INCLUDE_DIRS = /usr/lib/python<version>/dist-packages/numpy/core/include/
+
+# make -j7 # runs 7 jobs in parallel
+# sudo make install
+#--------------------------------------------------------------------------------------------
+
+#--------------------------------------------------------------------------------------------
 # Super Update
-apt-get update -y && apt-get upgrade -y;
+apt update -y && apt upgrade -y;
 #--------------------------------------------------------------------------------------------
 
 #--------------------------------------------------------------------------------------------
