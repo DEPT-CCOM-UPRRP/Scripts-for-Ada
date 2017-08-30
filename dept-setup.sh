@@ -222,6 +222,12 @@ cd /home/student/Desktop/143
 #--------------------------------------------------------------------------------------------
 
 #--------------------------------------------------------------------------------------------
+# Metasploitable 
+ mv /home/student/Desktop/143/Metasploitable.vmdk.zip /home/student/Documents/VM-imgs
+#--------------------------------------------------------------------------------------------
+
+
+#--------------------------------------------------------------------------------------------
 # Change VM Images Permmisions
 chown -R student:student /home/student/Documents/VM-imgs/
 #--------------------------------------------------------------------------------------------
@@ -271,6 +277,21 @@ apt install -y /home/student/Desktop/143/bless_0.6.0-5_all.deb
 
 #--------------------------------------------------------------------------------------------
 # Open CV 3.3
+# From: https://github.com/menpo/conda-opencv3
+conda install conda-build
+# git clone https://github.com/menpo/conda-opencv3
+unzip opencv-3.3.0.zip
+unzip conda-opencv3-master.zip
+cd conda-opencv3-master
+# To update/replace the line of the file
+# sed -i "s/DWITH_FFMPEG=0/DWITH_FFMPEG=1/" build.sh
+conda config --add channels menpo
+conda build conda/
+conda install /PATH/TO/OPENCV3/PACKAGE.tar.gz
+
+# return to ~/Desktop/143
+cd ..
+
 # From http://opencv.org/releases.html
 
 # installing requirements 
