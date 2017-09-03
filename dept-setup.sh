@@ -1,10 +1,14 @@
 #!/bin/sh
 
-# New Xubuntu 16.04.3 LTS 
+# New Xubuntu 16.04.3 LTS
 # Software Setup Install
 
+{
+# Create user
+useradd -m -U -s /bin/bash -p '' student
+
 # Copy Folder
-# cp /media/student/B9ED-7B09/143 ~/Desktop
+cp /media/ccom-admin/*/143 /home/student/Desktop/
 
 #--------------------------------------------------------------------------------------------
 # Qt-creator 5 install
@@ -114,17 +118,8 @@ apt install -y /home/student/Desktop/143/openjdk-9-jdk_9~b114-0ubuntu1_amd64.deb
 #--------------------------------------------------------------------------------------------
 
 #--------------------------------------------------------------------------------------------
-# Virtual Box 5.1
-apt install -y /home/student/Desktop/143/virtualbox-5.1_5.1.26-117224~Ubuntu~xenial_amd64.deb
-
-# Add extension pack
-vboxmanage extpack install /home/student/Desktop/143/Oracle_VM_VirtualBox_Extension_Pack-5.1.26-117224.vbox-extpack
-#--------------------------------------------------------------------------------------------
-
-#--------------------------------------------------------------------------------------------
 # Anaconda
 bash /home/student/Desktop/143/Anaconda3-4.4.0-Linux-x86_64.sh
-
 
 export PATH=$PATH:~/opt/anaconda3/bin/
 # conda create -n py3k python=3 anaconda
@@ -165,13 +160,13 @@ apt install -y /home/student/Desktop/143/rstudio-xenial-1.0.153-amd64.deb
 
 #--------------------------------------------------------------------------------------------
 # Interpretador de Python 3
-# sudo apt-get install python3
+# sudo apt install python3
 #--------------------------------------------------------------------------------------------
 
 #--------------------------------------------------------------------------------------------
-# gcc/g++ Install 
+# gcc/g++ Install
 # Already done by Qt Creator
-# apt-get install build-essential
+# apt install build-essential
 #--------------------------------------------------------------------------------------------
 
 #--------------------------------------------------------------------------------------------
@@ -190,7 +185,7 @@ apt install -y racket_6.10-1_amd64.deb
 # 	ml-lex
 # 	ml-yacc
 
-apt-get install -y gcc-multilib g++-multilib lib32z1
+apt install -y gcc-multilib g++-multilib lib32z1
 apt install -y /home/student/Desktop/143/*sml*.deb
 
 # From source:
@@ -202,36 +197,7 @@ apt install -y /home/student/Desktop/143/*sml*.deb
 # rm /usr/local/sml/config.tgz
 # bash /usr/local/sml/config/install.sh
 
-
 #--------------------------------------------------------------------------------------------
-
-#--------------------------------------------------------------------------------------------
-# Kali Install
-# http://ccom.uprrp.edu/~jortiz/cyber/vms/ccom4088-kali-v20162701.tar.gz
-mkdir /home/student/Documents/VM-imgs
-mv /home/student/Desktop/143/ccom4088-kali-v20162701.tar.gz /home/student/Documents/VM-imgs
-cd /home/student/Documents/VM-imgs
-tar xvf /home/student/Documents/VM-imgs/ccom4088-kali-v20162701.tar.gz
-rm /home/student/Documents/VM-imgs/ccom4088-kali-v20162701.tar.gz
-cd /home/student/Desktop/143
-#--------------------------------------------------------------------------------------------
-
-#--------------------------------------------------------------------------------------------
-# BioVagrant
- mv /home/student/Desktop/143/biovagrant.ova /home/student/Documents/VM-imgs
-#--------------------------------------------------------------------------------------------
-
-#--------------------------------------------------------------------------------------------
-# Metasploitable 
- mv /home/student/Desktop/143/Metasploitable.vmdk.zip /home/student/Documents/VM-imgs
-#--------------------------------------------------------------------------------------------
-
-
-#--------------------------------------------------------------------------------------------
-# Change VM Images Permmisions
-chown -R student:student /home/student/Documents/VM-imgs/
-#--------------------------------------------------------------------------------------------
-
 
 #--------------------------------------------------------------------------------------------
 # Latex y algun editor como TexMaker install
@@ -294,7 +260,7 @@ cd ..
 
 # From http://opencv.org/releases.html
 
-# installing requirements 
+# installing requirements
 # apt install -y build-essential cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev python-dev python-numpy libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libjasper-dev libdc1394-22-dev
 
 # Following this guide: http://docs.opencv.org/trunk/d7/d9f/tutorial_linux_install.html
@@ -305,7 +271,7 @@ cd ..
 # cd build
 
 # Must configure make options
-# cmake -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=/usr/local .. 
+# cmake -D CMAKE_BUILD_TYPE=Release -D CMAKE_INSTALL_PREFIX=/usr/local ..
 
 # PYTHON2(3)_EXECUTABLE = <path to python>
 # PYTHON_INCLUDE_DIR = /usr/include/python<version>
@@ -315,6 +281,179 @@ cd ..
 
 # make -j7 # runs 7 jobs in parallel
 # sudo make install
+#--------------------------------------------------------------------------------------------
+
+#--------------------------------------------------------------------------------------------
+# Virtual Box 5.1
+apt install -y /home/student/Desktop/143/virtualbox-5.1_5.1.26-117224~Ubuntu~xenial_amd64.deb
+
+# Add extension pack
+vboxmanage extpack install /home/student/Desktop/143/Oracle_VM_VirtualBox_Extension_Pack-5.1.26-117224.vbox-extpack
+
+# Create NAT
+VBoxManage natnetwork add --netname MetaNet --network "10.0.2.0/24" --enable --dhcp on
+
+# Awesome resource: https://www.howopensource.com/2011/06/how-to-use-virtualbox-in-terminal-commandline/
+
+#--------------------------------------------------------------------------------------------
+
+#--------------------------------------------------------------------------------------------
+# Make Virtual Machine file directory
+mkdir /home/student/Documents/VM-imgs
+#--------------------------------------------------------------------------------------------
+
+#--------------------------------------------------------------------------------------------
+# Kali Install
+# Old kali source
+# http://ccom.uprrp.edu/~jortiz/cyber/vms/ccom4088-kali-v20162701.tar.gz
+# tar xvf /home/student/Desktop/143/ccom4088-kali-v20162701.tar.gz -C /home/student/Documents/VM-imgs
+# VMPath='/home/student/Documents/VM-imgs/ccom4088-kali-v20162701'
+
+# Consider updating to new version
+# http://ccom.uprrp.edu/~jortiz/cyber/hscamp/atackpr-camp2017.tar.gz
+tar xvf /home/student/Desktop/143/atackpr-camp2017.tar.gz -C /home/student/Documents/VM-imgs
+VMPath='/home/student/Documents/VM-imgs/atackpr-camp2017.vmdk'
+
+# Create VM
+VM='kali'
+DESC="Virtual Machine containing a custom version of kali with some excersices for class"
+
+# VBoxManage convertfromraw --format vmdk --variant Standard $VMPath.vmdk $VMPath.vdi
+VBoxManage createvm --name $VM --ostype Debian_64 --basefolder /home/student/VirtualBox\ VMs/ --register
+VBoxManage storagectl $VM --name SATA --add sata --controller IntelAhci --bootable on
+VBoxManage storageattach $VM --storagectl SATA --port 0 --device 0 --type hdd --medium $VMPath
+
+# Resource Configuration
+# VM Description
+VBoxManage modifyvm $VM --Description $DESC
+
+# Mother Board
+vboxmanage modifyvm $VM --acpi on --ioapic on --vtxux on --chipset piix3
+
+# Proccesor, Memory and
+vboxmanage modifyvm $VM --memory 2048 --cpus 2
+
+# Video
+vboxmanage modifyvm $VM --vram 128 --accelerate3d on
+
+# Audio
+vboxmanage modifyvm $VM --audio alsa --audiocontroller ac97
+
+# Clipboard and File
+vboxmanage modifyvm $VM --clipboard bidirectional --draganddrop bidirectional
+
+# Usb and keyboard
+vboxmanage modifyvm $VM --usb on --mouse ps2 --keyboard ps2
+
+# Connect to nat
+VBoxManage modifyvm $VM --cableconnected2 on --nic2 natnetwork --nat-network MetaNet
+
+#--------------------------------------------------------------------------------------------
+
+#--------------------------------------------------------------------------------------------
+# Metasploitable
+# unzip /home/student/Desktop/143/Metasploitable.vmdk.zip -d /home/student/Documents/VM-imgs
+# VMPath='/home/student/Documents/VM-imgs/Metasploitable.vmdk'
+
+
+# Consider using new 2017 Metasploitable vmdk
+# # source http://ccom.uprrp.edu/~jortiz/cyber/hscamp/atackpr-camp-ms-2017.tar.gz
+# tar xvf /home/student/Desktop/143/atackpr-camp-ms-2017.tar.gz -C /home/student/Documents/VM-imgs
+VMPath='/home/student/Documents/VM-imgs/atackpr-camp-ms-2017.vmdk'
+
+# Create vm
+VM='Metasploitable'
+
+DESC="Virtual Machine containing a custom version of Metasploitable vm with some excersices for class"
+
+# VBoxManage convertfromraw --format vmdk --variant Standard $VMPath.vmdk $VMPath.vdi
+VBoxManage createvm --name $VM --ostype Linux_64 --basefolder /home/student/VirtualBox\ VMs/ --register
+VBoxManage storagectl $VM --name SATA --add sata --controller IntelAhci --bootable on
+VBoxManage storageattach $VM --storagectl SATA --port 0 --device 0 --type hdd --medium $VMPath
+
+# Resource Configuration
+# VM Description
+VBoxManage modifyvm $VM --Description $DESC
+
+# Mother Board
+vboxmanage modifyvm $VM --acpi on --ioapic on --vtxux on --chipset piix3
+
+# Proccesor, Memory and
+vboxmanage modifyvm $VM --memory 2048 --cpus 2
+
+# Video
+vboxmanage modifyvm $VM --vram 128 --accelerate3d on
+
+# Audio
+vboxmanage modifyvm $VM --audio alsa --audiocontroller ac97
+
+# Clipboard and File
+vboxmanage modifyvm $VM --clipboard bidirectional --draganddrop bidirectional
+
+# Usb and keyboard
+vboxmanage modifyvm $VM --usb on --mouse ps2 --keyboard ps2
+
+# Connect to nat
+VBoxManage modifyvm $VM --cableconnected2 on --nic2 natnetwork --nat-network MetaNet
+
+#--------------------------------------------------------------------------------------------
+
+#--------------------------------------------------------------------------------------------
+# BioVagrant
+unzip /home/student/Desktop/143/biovagrant.ova -d /home/student/Documents/VM-imgs/
+VMPath="/home/student/Documents/VM-imgs/biovagrant.ova"
+VM="BioVagrant"
+DESC="Virtual machine containing a version of BioVagrant"
+
+VBoxManage import $VMPath
+VBoxManage modifyvm $VM --Description $DESC
+#--------------------------------------------------------------------------------------------
+
+#--------------------------------------------------------------------------------------------
+# eip-intro Install
+
+# http://ccom.uprrp.edu/~rarce/eipgb/chapters/eip-intro/index.html
+# http://eip.ccom.uprrp.edu/vms/eip-ubuntu-qt.tar.gz
+tar xvf /home/student/Desktop/143/eip-ubuntu-qt.tar.gz -C /home/student/Documents/VM-imgs
+VMPath='/home/student/Documents/VM-imgs/eip-ubuntu-qt.vmdk'
+
+# Create vm
+VM='EIP-Labs'
+
+DESC="Virtual Machine containing a EIP-Labs excercises for class"
+
+# VBoxManage convertfromraw --format vmdk --variant Standard $VMPath.vmdk $VMPath.vdi
+VBoxManage createvm --name $VM --ostype Ubuntu_64 --basefolder /home/student/VirtualBox\ VMs/ --register
+VBoxManage storagectl $VM --name SATA --add sata --controller IntelAhci --bootable on
+VBoxManage storageattach $VM --storagectl SATA --port 0 --device 0 --type hdd --medium $VMPath
+
+# Resource Configuration
+# VM Description
+VBoxManage modifyvm --Description $DESC
+
+# Mother Board
+vboxmanage modifyvm $VM --acpi on --ioapic on --vtxux on --chipset piix3
+
+# Proccesor, Memory and
+vboxmanage modifyvm $VM --memory 2048 --cpus 2
+
+# Video
+vboxmanage modifyvm $VM --vram 128 --accelerate3d on
+
+# Audio
+vboxmanage modifyvm $VM --audio alsa --audiocontroller ac97
+
+# Clipboard and File
+vboxmanage modifyvm $VM --clipboard bidirectional --draganddrop bidirectional
+
+# Usb and keyboard
+vboxmanage modifyvm $VM --usb on --mouse ps2 --keyboard ps2
+
+#--------------------------------------------------------------------------------------------
+
+#--------------------------------------------------------------------------------------------
+# Change VM Images Permmisions
+chown -R student:student /home/student/Documents/VM-imgs/
 #--------------------------------------------------------------------------------------------
 
 #--------------------------------------------------------------------------------------------
@@ -331,3 +470,4 @@ apt autoclean -y && apt autoremove -y;
 # Experimental clenaup
 rm -rf /home/student/Desktop/143
 #--------------------------------------------------------------------------------------------
+} 2> script_errors.log
