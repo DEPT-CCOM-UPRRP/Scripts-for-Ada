@@ -289,6 +289,12 @@ apt install -y /home/student/Desktop/143/virtualbox-5.1_5.1.26-117224~Ubuntu~xen
 
 # Add extension pack
 vboxmanage extpack install /home/student/Desktop/143/Oracle_VM_VirtualBox_Extension_Pack-5.1.26-117224.vbox-extpack
+
+# Create NAT
+VBoxManage natnetwork add --netname MetaNet --network "10.0.2.0/24" --enable --dhcp on
+
+# Awesome resource: https://www.howopensource.com/2011/06/how-to-use-virtualbox-in-terminal-commandline/
+
 #--------------------------------------------------------------------------------------------
 
 #--------------------------------------------------------------------------------------------
@@ -300,19 +306,107 @@ mkdir /home/student/Documents/VM-imgs
 # Kali Install
 # Old kali source
 # http://ccom.uprrp.edu/~jortiz/cyber/vms/ccom4088-kali-v20162701.tar.gz
+# tar xvf /home/student/Desktop/143/ccom4088-kali-v20162701.tar.gz -C /home/student/Documents/VM-imgs
+# VMPath='/home/student/Documents/VM-imgs/ccom4088-kali-v20162701'
+
 # Consider updating to new version
 # http://ccom.uprrp.edu/~jortiz/cyber/hscamp/atackpr-camp2017.tar.gz
-tar xvf /home/student/Desktop/143/ccom4088-kali-v20162701.tar.gz -C /home/student/Documents/VM-imgs
+tar xvf /home/student/Desktop/143/atackpr-camp2017.tar.gz -C /home/student/Documents/VM-imgs
+VMPath='/home/student/Documents/VM-imgs/atackpr-camp2017.vmdk'
+
+# Create VM
+VM='kali'
+DESC="Virtual Machine containing a custom version of kali with some excersices for class"
+
+# VBoxManage convertfromraw --format vmdk --variant Standard $VMPath.vmdk $VMPath.vdi
+VBoxManage createvm --name $VM --ostype Debian_64 --basefolder /home/student/VirtualBox\ VMs/ --register
+VBoxManage storagectl $VM --name SATA --add sata --controller IntelAhci --bootable on
+VBoxManage storageattach $VM --storagectl SATA --port 0 --device 0 --type hdd --medium $VMPath
+
+# Resource Configuration
+# VM Description
+VBoxManage modifyvm $VM --Description $DESC
+
+# Mother Board
+vboxmanage modifyvm $VM --acpi on --ioapic on --vtxux on --chipset piix3
+
+# Proccesor, Memory and
+vboxmanage modifyvm $VM --memory 2048 --cpus 2
+
+# Video
+vboxmanage modifyvm $VM --vram 128 --accelerate3d on
+
+# Audio
+vboxmanage modifyvm $VM --audio alsa --audiocontroller ac97
+
+# Clipboard and File
+vboxmanage modifyvm $VM --clipboard bidirectional --draganddrop bidirectional
+
+# Usb and keyboard
+vboxmanage modifyvm $VM --usb on --mouse ps2 --keyboard ps2
+
+# Connect to nat
+VBoxManage modifyvm $VM --cableconnected2 on --nic2 natnetwork --nat-network MetaNet
+
 #--------------------------------------------------------------------------------------------
 
 #--------------------------------------------------------------------------------------------
 # Metasploitable
-unzip /home/student/Desktop/143/Metasploitable.vmdk.zip -d /home/student/Documents/VM-imgs
+# unzip /home/student/Desktop/143/Metasploitable.vmdk.zip -d /home/student/Documents/VM-imgs
+# VMPath='/home/student/Documents/VM-imgs/Metasploitable.vmdk'
+
+
+# Consider using new 2017 Metasploitable vmdk
+# # source http://ccom.uprrp.edu/~jortiz/cyber/hscamp/atackpr-camp-ms-2017.tar.gz
+# tar xvf /home/student/Desktop/143/atackpr-camp-ms-2017.tar.gz -C /home/student/Documents/VM-imgs
+VMPath='/home/student/Documents/VM-imgs/atackpr-camp-ms-2017.vmdk'
+
+# Create vm
+VM='Metasploitable'
+
+DESC="Virtual Machine containing a custom version of Metasploitable vm with some excersices for class"
+
+# VBoxManage convertfromraw --format vmdk --variant Standard $VMPath.vmdk $VMPath.vdi
+VBoxManage createvm --name $VM --ostype Linux_64 --basefolder /home/student/VirtualBox\ VMs/ --register
+VBoxManage storagectl $VM --name SATA --add sata --controller IntelAhci --bootable on
+VBoxManage storageattach $VM --storagectl SATA --port 0 --device 0 --type hdd --medium $VMPath
+
+# Resource Configuration
+# VM Description
+VBoxManage modifyvm $VM --Description $DESC
+
+# Mother Board
+vboxmanage modifyvm $VM --acpi on --ioapic on --vtxux on --chipset piix3
+
+# Proccesor, Memory and
+vboxmanage modifyvm $VM --memory 2048 --cpus 2
+
+# Video
+vboxmanage modifyvm $VM --vram 128 --accelerate3d on
+
+# Audio
+vboxmanage modifyvm $VM --audio alsa --audiocontroller ac97
+
+# Clipboard and File
+vboxmanage modifyvm $VM --clipboard bidirectional --draganddrop bidirectional
+
+# Usb and keyboard
+vboxmanage modifyvm $VM --usb on --mouse ps2 --keyboard ps2
+
+# Connect to nat
+VBoxManage modifyvm $VM --cableconnected2 on --nic2 natnetwork --nat-network MetaNet
+
 #--------------------------------------------------------------------------------------------
 
 #--------------------------------------------------------------------------------------------
 # BioVagrant
-unzip /home/student/Desktop/143/biovagrant.ova -d /home/student/Documents/VM-imgs
+unzip /home/student/Desktop/143/biovagrant.ova -d /home/student/Documents/VM-imgs/
+VMPath="/home/student/Documents/VM-imgs/biovagrant.ova"
+VM="BioVagrant"
+DESC="Virtual machine containing a version of BioVagrant"
+
+VBoxManage import $VMPath
+VBoxManage modifyvm $VM --Description $DESC
 #--------------------------------------------------------------------------------------------
 
 #--------------------------------------------------------------------------------------------
@@ -321,6 +415,39 @@ unzip /home/student/Desktop/143/biovagrant.ova -d /home/student/Documents/VM-img
 # http://ccom.uprrp.edu/~rarce/eipgb/chapters/eip-intro/index.html
 # http://eip.ccom.uprrp.edu/vms/eip-ubuntu-qt.tar.gz
 tar xvf /home/student/Desktop/143/eip-ubuntu-qt.tar.gz -C /home/student/Documents/VM-imgs
+VMPath='/home/student/Documents/VM-imgs/eip-ubuntu-qt.vmdk'
+
+# Create vm
+VM='EIP-Labs'
+
+DESC="Virtual Machine containing a EIP-Labs excercises for class"
+
+# VBoxManage convertfromraw --format vmdk --variant Standard $VMPath.vmdk $VMPath.vdi
+VBoxManage createvm --name $VM --ostype Ubuntu_64 --basefolder /home/student/VirtualBox\ VMs/ --register
+VBoxManage storagectl $VM --name SATA --add sata --controller IntelAhci --bootable on
+VBoxManage storageattach $VM --storagectl SATA --port 0 --device 0 --type hdd --medium $VMPath
+
+# Resource Configuration
+# VM Description
+VBoxManage modifyvm --Description $DESC
+
+# Mother Board
+vboxmanage modifyvm $VM --acpi on --ioapic on --vtxux on --chipset piix3
+
+# Proccesor, Memory and
+vboxmanage modifyvm $VM --memory 2048 --cpus 2
+
+# Video
+vboxmanage modifyvm $VM --vram 128 --accelerate3d on
+
+# Audio
+vboxmanage modifyvm $VM --audio alsa --audiocontroller ac97
+
+# Clipboard and File
+vboxmanage modifyvm $VM --clipboard bidirectional --draganddrop bidirectional
+
+# Usb and keyboard
+vboxmanage modifyvm $VM --usb on --mouse ps2 --keyboard ps2
 
 #--------------------------------------------------------------------------------------------
 
