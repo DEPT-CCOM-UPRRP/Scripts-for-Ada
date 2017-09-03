@@ -299,20 +299,20 @@ VBoxManage natnetwork add --netname MetaNet --network "10.0.2.0/24" --enable --d
 
 #--------------------------------------------------------------------------------------------
 # Make Virtual Machine file directory
-mkdir /home/student/Documents/VM-imgs
+mkdir /home/student/Documents/VM-images
 #--------------------------------------------------------------------------------------------
 
 #--------------------------------------------------------------------------------------------
 # Kali Install
 # Old kali source
 # http://ccom.uprrp.edu/~jortiz/cyber/vms/ccom4088-kali-v20162701.tar.gz
-# tar xvf /home/student/Desktop/143/ccom4088-kali-v20162701.tar.gz -C /home/student/Documents/VM-imgs
-# VMPath='/home/student/Documents/VM-imgs/ccom4088-kali-v20162701'
+# tar xvf /home/student/Desktop/143/ccom4088-kali-v20162701.tar.gz -C /home/student/Documents/VM-images
+# VMPath='/home/student/Documents/VM-images/ccom4088-kali-v20162701'
 
 # Consider updating to new version
 # http://ccom.uprrp.edu/~jortiz/cyber/hscamp/atackpr-camp2017.tar.gz
-tar xvf /home/student/Desktop/143/atackpr-camp2017.tar.gz -C /home/student/Documents/VM-imgs
-VMPath='/home/student/Documents/VM-imgs/atackpr-camp2017.vmdk'
+tar xvf /home/student/Desktop/143/atackpr-camp2017.tar.gz -C /home/student/Documents/VM-images
+VMPath='/home/student/Documents/VM-images/atackpr-camp2017.vmdk'
 
 # Create VM
 VM='kali'
@@ -325,7 +325,7 @@ VBoxManage storageattach $VM --storagectl SATA --port 0 --device 0 --type hdd --
 
 # Resource Configuration
 # VM Description
-VBoxManage modifyvm $VM --Description $DESC
+VBoxManage modifyvm $VM --description \"$DESC\"
 
 # Mother Board
 vboxmanage modifyvm $VM --acpi on --ioapic on --vtxux on --chipset piix3
@@ -352,14 +352,14 @@ VBoxManage modifyvm $VM --cableconnected2 on --nic2 natnetwork --nat-network Met
 
 #--------------------------------------------------------------------------------------------
 # Metasploitable
-# unzip /home/student/Desktop/143/Metasploitable.vmdk.zip -d /home/student/Documents/VM-imgs
-# VMPath='/home/student/Documents/VM-imgs/Metasploitable.vmdk'
+# unzip /home/student/Desktop/143/Metasploitable.vmdk.zip -d /home/student/Documents/VM-images
+# VMPath='/home/student/Documents/VM-images/Metasploitable.vmdk'
 
 
 # Consider using new 2017 Metasploitable vmdk
 # # source http://ccom.uprrp.edu/~jortiz/cyber/hscamp/atackpr-camp-ms-2017.tar.gz
-# tar xvf /home/student/Desktop/143/atackpr-camp-ms-2017.tar.gz -C /home/student/Documents/VM-imgs
-VMPath='/home/student/Documents/VM-imgs/atackpr-camp-ms-2017.vmdk'
+# tar xvf /home/student/Desktop/143/atackpr-camp-ms-2017.tar.gz -C /home/student/Documents/VM-images
+VMPath='/home/student/Documents/VM-images/atackpr-camp-ms-2017.vmdk'
 
 # Create vm
 VM='Metasploitable'
@@ -368,12 +368,13 @@ DESC="Virtual Machine containing a custom version of Metasploitable vm with some
 
 # VBoxManage convertfromraw --format vmdk --variant Standard $VMPath.vmdk $VMPath.vdi
 VBoxManage createvm --name $VM --ostype Linux_64 --basefolder /home/student/VirtualBox\ VMs/ --register
-VBoxManage storagectl $VM --name SATA --add sata --controller IntelAhci --bootable on
+VBoxManage registervm /home/student/VirtualBox\ VMs/$VM.vbox
+VBoxManage storagectl $VM --name SATA --add sata --controller IntelAhci --bootable onv
 VBoxManage storageattach $VM --storagectl SATA --port 0 --device 0 --type hdd --medium $VMPath
 
 # Resource Configuration
 # VM Description
-VBoxManage modifyvm $VM --Description $DESC
+VBoxManage modifyvm $VM --description \"$DESC\"
 
 # Mother Board
 vboxmanage modifyvm $VM --acpi on --ioapic on --vtxux on --chipset piix3
@@ -400,13 +401,13 @@ VBoxManage modifyvm $VM --cableconnected2 on --nic2 natnetwork --nat-network Met
 
 #--------------------------------------------------------------------------------------------
 # BioVagrant
-unzip /home/student/Desktop/143/biovagrant.ova -d /home/student/Documents/VM-imgs/
-VMPath="/home/student/Documents/VM-imgs/biovagrant.ova"
+unzip /home/student/Desktop/143/biovagrant.ova -d /home/student/Documents/VM-images/
+VMPath="/home/student/Documents/VM-images/biovagrant.ova"
 VM="BioVagrant"
 DESC="Virtual machine containing a version of BioVagrant"
 
 VBoxManage import $VMPath
-VBoxManage modifyvm $VM --Description $DESC
+VBoxManage modifyvm $VM --description \"$DESC\"
 #--------------------------------------------------------------------------------------------
 
 #--------------------------------------------------------------------------------------------
@@ -414,8 +415,8 @@ VBoxManage modifyvm $VM --Description $DESC
 
 # http://ccom.uprrp.edu/~rarce/eipgb/chapters/eip-intro/index.html
 # http://eip.ccom.uprrp.edu/vms/eip-ubuntu-qt.tar.gz
-tar xvf /home/student/Desktop/143/eip-ubuntu-qt.tar.gz -C /home/student/Documents/VM-imgs
-VMPath='/home/student/Documents/VM-imgs/eip-ubuntu-qt.vmdk'
+tar xvf /home/student/Desktop/143/eip-ubuntu-qt.tar.gz -C /home/student/Documents/VM-images
+VMPath='/home/student/Documents/VM-images/eip-ubuntu-qt.vmdk'
 
 # Create vm
 VM='EIP-Labs'
@@ -429,7 +430,7 @@ VBoxManage storageattach $VM --storagectl SATA --port 0 --device 0 --type hdd --
 
 # Resource Configuration
 # VM Description
-VBoxManage modifyvm --Description $DESC
+VBoxManage modifyvm --description \"$DESC\"
 
 # Mother Board
 vboxmanage modifyvm $VM --acpi on --ioapic on --vtxux on --chipset piix3
@@ -453,7 +454,7 @@ vboxmanage modifyvm $VM --usb on --mouse ps2 --keyboard ps2
 
 #--------------------------------------------------------------------------------------------
 # Change VM Images Permmisions
-chown -R student:student /home/student/Documents/VM-imgs/
+chown -R student:student /home/student/Documents/VM-images/
 #--------------------------------------------------------------------------------------------
 
 #--------------------------------------------------------------------------------------------
