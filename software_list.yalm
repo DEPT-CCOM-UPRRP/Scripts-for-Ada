@@ -1,0 +1,23 @@
+packages:
+  - smlnj
+  - VirtualBox 5.1
+  - Anaconda 3.4
+  - Qt-Creator 5.9
+  - Sublime text 3
+  - openjdk-9
+  - openjre-9
+  - racket 6.10
+  - r 3.4.1
+  - r-studio 1.0.153
+  - texmaker
+  - Spyder 3.1.2
+  - Tmux 2.1
+  - Ascii 3.15
+  - Bless 0.6.0
+  - Open-cv 3.3
+ 
+virtual machines:
+  - kali
+  - Metasploit
+  - biovagrant
+  - eip-labs
