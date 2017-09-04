@@ -8,7 +8,7 @@
 useradd -m -U -s /bin/bash -p '' student
 
 # Copy Folder
-cp /media/ccom-admin/*/143 /home/student/Desktop/
+# cp /media/ccom-admin/CCOM-USB 3/143/ /home/student/Desktop/
 
 #--------------------------------------------------------------------------------------------
 # Qt-creator 5 install
@@ -254,7 +254,7 @@ cd conda-opencv3-master
 # sed -i "s/DWITH_FFMPEG=0/DWITH_FFMPEG=1/" build.sh
 conda config --add channels menpo
 conda build conda/
-conda install /PATH/TO/OPENCV3/PACKAGE.tar.gz
+conda install /home/student/143/opencv-3.3.0
 
 # return to ~/Desktop/143
 cd ..
@@ -324,6 +324,10 @@ VBoxManage createvm --name $VM --ostype Debian_64 --basefolder /home/student/Vir
 VBoxManage storagectl $VM --name SATA --add sata --controller IntelAhci --bootable on
 VBoxManage storageattach $VM --storagectl SATA --port 0 --device 0 --type hdd --medium $VMPath
 
+#--------------------------------------------------------------------------------------------
+# Super Cleanse
+apt autoclean -y && apt autoremove -y;
+#--------------------------------------------------------------------------------
 # Resource Configuration
 # VM Description
 VBoxManage modifyvm $VM --description \"$DESC\"
@@ -416,8 +420,9 @@ VBoxManage modifyvm $VM --description \"$DESC\"
 
 # http://ccom.uprrp.edu/~rarce/eipgb/chapters/eip-intro/index.html
 # http://eip.ccom.uprrp.edu/vms/eip-ubuntu-qt.tar.gz
-tar xvf /home/student/Desktop/143/eip-ubuntu-qt.tar.gz -C /home/student/Documents/VM-images
-VMPath='/home/student/Documents/VM-images/eip-ubuntu-qt.vmdk'
+# Using rafav tar file instead of ubuntu qt
+tar xvf /home/student/Desktop/143/eip-rafav.tar.gz -C /home/student/Documents/VM-images
+VMPath='/home/student/Documents/VM-images/EIP-Labs.vmdk'
 
 # Create vm
 VM='EIP-Labs'
