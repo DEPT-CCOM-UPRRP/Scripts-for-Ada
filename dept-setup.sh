@@ -121,7 +121,8 @@ apt install -y /home/student/Desktop/143/openjdk-9-jdk_9~b114-0ubuntu1_amd64.deb
 # Anaconda
 bash /home/student/Desktop/143/Anaconda3-4.4.0-Linux-x86_64.sh
 
-export PATH=$PATH:~/opt/anaconda3/bin/
+export PATH=/opt/anaconda3/bin/:$PATH
+echo 'export PATH=/opt/anaconda3/bin/:$PATH' >> /home/student/.bashprofile
 # conda create -n py3k python=3 anaconda
 # source activate py3k
 
