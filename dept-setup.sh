@@ -5,7 +5,7 @@
 
 {
 # Create user
-useradd -m -U -s /bin/bash -p '' student
+useradd -m -U -s /bin/bash -p '' student;
 
 # Copy Folder
 # cp /media/ccom-admin/CCOM-USB 3/143/ /home/student/Desktop/
@@ -17,7 +17,7 @@ useradd -m -U -s /bin/bash -p '' student
 # Online option for Qt 5.9
 # wget http://download.qt.io/official_releases/online_installers/qt-unified-linux-x64-online.run
 
-chmod +x /home/student/Desktop/143/qt-opensource-linux-x64-5.9.1.run;
+chmod +x /home/ccom-admin/Desktop/143/qt-opensource-linux-x64-5.9.1.run;
 ./qt-opensource-linux-x64-5.9.1.run;
 apt install -y build-essential libfontconfig1 mesa-common-dev libglu1-mesa-dev -y;
 
@@ -45,7 +45,8 @@ Name[en_US]=Qt-Creator" >> ~/.local/share/applications/Qt-Creator.desktop;
 # fi
 
 # Hardcoded
-echo "text/qtcreator=Qt-Creator.desktop;" >> /home/student/.local/share/applications/defaults.list
+echo "text/qtcreator=Qt-Creator.desktop;" >> /home/student/.local/share/applications/defaults.list;
+echo "text/qtcreator=Qt-Creator.desktop;" >> /home/ccom-admin/.local/share/applications/defaults.list;
 
 # Add to mime db
 echo "[added Associations]
@@ -57,7 +58,7 @@ update-mime-database /usr/share/mime;
 # Sublime text 3 install
 
 # From deb:
-apt install -y /home/student/Desktop/143/sublime-text_build-3126_amd64.deb
+apt install -y /home/ccom-admin/Desktop/143/sublime-text_build-3126_amd64.deb;
 
 # From source:
 # tar vxjf /home/student/Desktop/143/sublime_text_3_build_3126_x64.tar.bz2;
@@ -96,8 +97,8 @@ apt install -y /home/student/Desktop/143/sublime-text_build-3126_amd64.deb
 # Java Install
 
 # From deb:
-apt install -y /home/student/Desktop/143/openjdk-9-jdk_9~b114-0ubuntu1_amd64.deb /home/student/Desktop/143/openjdk-9-jre_9~b114-0ubuntu1_amd64.deb
-
+apt install -y /home/ccom-admin/Desktop/143/openjdk-9-jdk_9~b114-0ubuntu1_amd64.deb
+/home/ccom-admin/Desktop/143/openjdk-9-jre_9~b114-0ubuntu1_amd64.deb
 # From source:
 # tar xvf /home/student/Desktop/143/jre-8u121-linux-x64.tar.gz
 # mkdir -p /usr/lib/jvm
@@ -119,10 +120,10 @@ apt install -y /home/student/Desktop/143/openjdk-9-jdk_9~b114-0ubuntu1_amd64.deb
 
 #--------------------------------------------------------------------------------------------
 # Anaconda
-bash /home/student/Desktop/143/Anaconda3-4.4.0-Linux-x86_64.sh
+bash /home/ccom-admin/Desktop/143/Anaconda3-4.4.0-Linux-x86_64.sh -b -p /opt/anaconda3 ;
 
-export PATH=/opt/anaconda3/bin/:$PATH
-echo 'export PATH=/opt/anaconda3/bin/:$PATH' >> /home/student/.bashprofile
+echo 'export PATH=/opt/anaconda3/bin/:$PATH' >> /home/ccom-admin/.bashprofile;
+echo 'export PATH=/opt/anaconda3/bin/:$PATH' >> /home/student/.bashprofile;
 # conda create -n py3k python=3 anaconda
 # source activate py3k
 
@@ -134,12 +135,11 @@ echo 'export PATH=/opt/anaconda3/bin/:$PATH' >> /home/student/.bashprofile
 
 #--------------------------------------------------------------------------------------------
 # R / R Studio
-apt install -y /home/student/Desktop/143/r-base-core_3.4.1-2xenial0_amd64.deb
-apt install -y /home/student/Desktop/143/r-recommended_3.4.1-2xenial0_all.deb
-apt install -y /home/student/Desktop/143/r-doc-html_3.4.1-2xenial0_all.deb
-apt install -y /home/student/Desktop/143/r-base-html_3.4.1-2xenial0_all.deb
-apt install -y /home/student/Desktop/143/r-base_3.4.1-2xenial0_all.deb
-apt install -y /home/student/Desktop/143/rstudio-xenial-1.0.153-amd64.deb
+apt install -y /home/ccom-admin/Desktop/143/r-base-core_3.4.1-2xenial0_amd64.deb;
+apt install -y /home/ccom-admin/Desktop/143/r-base_3.4.1-2xenial0_all.deb;
+apt install -y /home/ccom-admin/Desktop/143/r-recommended_3.4.1-2xenial0_all.deb;
+apt install -y /home/ccom-admin/Desktop/143/r-doc-html_3.4.1-2xenial0_all.deb;
+apt install -y /home/ccom-admin/Desktop/143/rstudio-xenial-1.0.153-amd64.deb;
 
 # From source:
 # tar xvf /home/student/Desktop/143/rstudio-1.0.136-amd64-debian.tar.gz
@@ -172,8 +172,9 @@ apt install -y /home/student/Desktop/143/rstudio-xenial-1.0.153-amd64.deb
 
 #--------------------------------------------------------------------------------------------
 # Install Dr. Racket
-bash /home/student/Desktop/143/racket-6.10-x86_64-linux.sh
-apt install -y racket_6.10-1_amd64.deb
+# echo "yes\n1\n\n" | bash /home/student/Desktop/143/racket-6.10-x86_64-linux.sh
+apt install -y /home/ccom-admin/Desktop/143/racket_6.3-1_amd64.deb;
+
 
 # yes
 # 1
@@ -186,8 +187,8 @@ apt install -y racket_6.10-1_amd64.deb
 # 	ml-lex
 # 	ml-yacc
 
-apt install -y gcc-multilib g++-multilib lib32z1
-apt install -y /home/student/Desktop/143/*sml*.deb
+apt install -y gcc-multilib g++-multilib lib32z1;
+apt install -y /home/ccom-admin/Desktop/143/*smlnj*.deb;
 
 # From source:
 # mkdir /usr/local/sml
@@ -202,14 +203,14 @@ apt install -y /home/student/Desktop/143/*sml*.deb
 
 #--------------------------------------------------------------------------------------------
 # Latex y algun editor como TexMaker install
-apt install -y /home/student/Desktop/143/texmaker_ubuntu_16.04_4.5_amd64.deb
+apt install -y /home/ccom-admin/Desktop/143/texmaker_ubuntu_16.04_4.5_amd64.deb;
 #--------------------------------------------------------------------------------------------
 
 #--------------------------------------------------------------------------------------------
 # Jupyter Install
 # pip3 install --upgrade pip
 # pip3 install jupyter
-jupyter notebook
+jupyter notebook;
 #--------------------------------------------------------------------------------------------
 
 #--------------------------------------------------------------------------------------------
@@ -218,43 +219,43 @@ jupyter notebook
 # python wheel install spyder-3.1.2-py3-none-any.whl
 # pip install --upgrade pip
 # pip install /home/student/Desktop/143/spyder-3.1.2-py3-none-any.whl
-apt install -y /home/student/Desktop/143/python3-spyder_3.1.3+dfsg1-3_all.deb
+apt install -y /home/ccom-admin/Desktop/143/spyder3_2.3.8+dfsg1-1build1_all.deb;
 #--------------------------------------------------------------------------------------------
 
 #--------------------------------------------------------------------------------------------
 # Nand 2 tetris
-unzip /home/student/Desktop/143/nand2tetris.zip -d /home/student/Documents
-chown -R student:student /home/student/Documents/nand2tetris
+unzip /home/ccom-admin/Desktop/143/nand2tetris.zip -d /home/student/Documents;
+chown -R student:student /home/student/Documents/nand2tetris;
 #--------------------------------------------------------------------------------------------
 
 #--------------------------------------------------------------------------------------------
 # Tmux 2.1
-apt install -y /home/student/Desktop/143/tmux_2.1-3build1_amd64.deb
+apt install -y /home/ccom-admin/Desktop/143/tmux_2.1-3build1_amd64.deb;
 #--------------------------------------------------------------------------------------------
 
 #--------------------------------------------------------------------------------------------
 # Ascii 3.15
-apt install -y /home/student/Desktop/143/ascii_3.15-1_amd64.deb
+apt install -y /home/ccom-admin/Desktop/143/ascii_3.15-1_amd64.deb;
 #--------------------------------------------------------------------------------------------
 
 #--------------------------------------------------------------------------------------------
 # Bless 0.6.0
-apt install -y /home/student/Desktop/143/bless_0.6.0-5_all.deb
+apt install -y /home/ccom-admin/Desktop/143/bless_0.6.0-5_all.deb;
 #--------------------------------------------------------------------------------------------
 
 #--------------------------------------------------------------------------------------------
 # Open CV 3.3
 # From: https://github.com/menpo/conda-opencv3
-conda install conda-build
+conda install conda-build;
 # git clone https://github.com/menpo/conda-opencv3
-unzip opencv-3.3.0.zip
-unzip conda-opencv3-master.zip
+yes A | unzip /home/ccom-admin/Desktop/143/opencv-3.3.0.zip;
+yes A | unzip conda-opencv3-master.zip;
 cd conda-opencv3-master
 # To update/replace the line of the file
 # sed -i "s/DWITH_FFMPEG=0/DWITH_FFMPEG=1/" build.sh
-conda config --add channels menpo
-conda build conda/
-conda install /home/student/143/opencv-3.3.0
+conda config --add channels menpo;
+conda build conda/;
+conda install /home/ccom-admin/Desktop/143/opencv-3.3.0;
 
 # return to ~/Desktop/143
 cd ..
@@ -286,13 +287,12 @@ cd ..
 
 #--------------------------------------------------------------------------------------------
 # Virtual Box 5.1
-apt install -y /home/student/Desktop/143/virtualbox-5.1_5.1.26-117224~Ubuntu~xenial_amd64.deb
-
+apt install -y /home/ccom-admin/Desktop/143/virtualbox_5.0.40-dfsg-0ubuntu1.16.04.1_amd64.deb;
 # Add extension pack
-vboxmanage extpack install /home/student/Desktop/143/Oracle_VM_VirtualBox_Extension_Pack-5.1.26-117224.vbox-extpack
+vboxmanage extpack install /home/ccom-admin/Desktop/143/Oracle_VM_VirtualBox_Extension_Pack-5.1.26-117224.vbox-extpack;
 
 # Create NAT
-VBoxManage natnetwork add --netname MetaNet --network "10.0.2.0/24" --enable --dhcp on
+VBoxManage natnetwork add --netname MetaNet --network "10.0.2.0/24" --enable --dhcp on;
 
 # Awesome resource: https://www.howopensource.com/2011/06/how-to-use-virtualbox-in-terminal-commandline/
 
@@ -300,7 +300,7 @@ VBoxManage natnetwork add --netname MetaNet --network "10.0.2.0/24" --enable --d
 
 #--------------------------------------------------------------------------------------------
 # Make Virtual Machine file directory
-mkdir /home/student/Documents/VM-images
+mkdir /home/student/Documents/VM-images;
 #--------------------------------------------------------------------------------------------
 
 #--------------------------------------------------------------------------------------------
@@ -312,7 +312,7 @@ mkdir /home/student/Documents/VM-images
 
 # Consider updating to new version
 # http://ccom.uprrp.edu/~jortiz/cyber/hscamp/atackpr-camp2017.tar.gz
-tar xvf /home/student/Desktop/143/atackpr-camp2017.tar.gz -C /home/student/Documents/VM-images
+tar xvf /home/ccom-admin/Desktop/143/atackpr-camp2017.tar.gz -C /home/student/Documents/VM-images;
 VMPath='/home/student/Documents/VM-images/atackpr-camp2017.vmdk'
 
 # Create VM
@@ -320,38 +320,37 @@ VM='kali'
 DESC="Virtual Machine containing a custom version of kali with some excersices for class"
 
 # VBoxManage convertfromraw --format vmdk --variant Standard $VMPath.vmdk $VMPath.vdi
-VBoxManage createvm --name $VM --ostype Debian_64 --basefolder /home/student/VirtualBox\ VMs/ --register
-VBoxManage storagectl $VM --name SATA --add sata --controller IntelAhci --bootable on
-VBoxManage storageattach $VM --storagectl SATA --port 0 --device 0 --type hdd --medium $VMPath
+VBoxManage createvm --name $VM --ostype Debian_64 --basefolder /home/student/VirtualBox\ VMs/ --register;
+VBoxManage storagectl $VM --name SATA --add sata --controller IntelAhci --bootable on;
+VBoxManage storageattach $VM --storagectl SATA --port 0 --device 0 --type hdd --medium $VMPath;
 
 #--------------------------------------------------------------------------------------------
-# Super Cleanse
-apt autoclean -y && apt autoremove -y;
+
 #--------------------------------------------------------------------------------
 # Resource Configuration
 # VM Description
-VBoxManage modifyvm $VM --description \"$DESC\"
+VBoxManage modifyvm $VM --description \"$DESC\";
 
 # Mother Board
-vboxmanage modifyvm $VM --acpi on --ioapic on --vtxux on --chipset piix3
+vboxmanage modifyvm $VM --acpi on --ioapic on --vtxux on --chipset piix3;
 
 # Proccesor, Memory and
-vboxmanage modifyvm $VM --memory 2048 --cpus 2
+vboxmanage modifyvm $VM --memory 2048 --cpus 2;
 
 # Video
-vboxmanage modifyvm $VM --vram 128 --accelerate3d on
+vboxmanage modifyvm $VM --vram 128 --accelerate3d on;
 
 # Audio
-vboxmanage modifyvm $VM --audio alsa --audiocontroller ac97
+vboxmanage modifyvm $VM --audio alsa --audiocontroller ac97;
 
 # Clipboard and File
-vboxmanage modifyvm $VM --clipboard bidirectional --draganddrop bidirectional
+vboxmanage modifyvm $VM --clipboard bidirectional --draganddrop bidirectional;
 
 # Usb and keyboard
-vboxmanage modifyvm $VM --usb on --mouse ps2 --keyboard ps2
+vboxmanage modifyvm $VM --usb on --mouse ps2 --keyboard ps2;
 
 # Connect to nat
-VBoxManage modifyvm $VM --cableconnected2 on --nic2 natnetwork --nat-network MetaNet
+VBoxManage modifyvm $VM --cableconnected2 on --nic2 natnetwork --nat-network MetaNet;
 
 #--------------------------------------------------------------------------------------------
 
@@ -359,60 +358,60 @@ VBoxManage modifyvm $VM --cableconnected2 on --nic2 natnetwork --nat-network Met
 # Metasploitable
 # unzip /home/student/Desktop/143/Metasploitable.vmdk.zip -d /home/student/Documents/VM-images
 # VMPath='/home/student/Documents/VM-images/Metasploitable.vmdk'
-
+tar xvf /home/ccom-admin/Desktop/143/atackpr-camp-ms-2017.tar.gz -C /home/student/Documents/VM-images;
 
 # Consider using new 2017 Metasploitable vmdk
 # # source http://ccom.uprrp.edu/~jortiz/cyber/hscamp/atackpr-camp-ms-2017.tar.gz
 # tar xvf /home/student/Desktop/143/atackpr-camp-ms-2017.tar.gz -C /home/student/Documents/VM-images
-VMPath='/home/student/Documents/VM-images/atackpr-camp-ms-2017.vmdk'
+VMPath='/home/student/Documents/VM-images/atackpr-camp-ms-2017.vmdk';
 
 # Create vm
-VM='Metasploitable'
+VM='Metasploitable';
 
-DESC="Virtual Machine containing a custom version of Metasploitable vm with some excersices for class"
+DESC="Virtual Machine containing a custom version of Metasploitable vm with some excersices for class";
 
 # VBoxManage convertfromraw --format vmdk --variant Standard $VMPath.vmdk $VMPath.vdi
-VBoxManage createvm --name $VM --ostype Linux_64 --basefolder /home/student/VirtualBox\ VMs/ --register
-VBoxManage registervm /home/student/VirtualBox\ VMs/$VM.vbox
-VBoxManage storagectl $VM --name SATA --add sata --controller IntelAhci --bootable onv
-VBoxManage storageattach $VM --storagectl SATA --port 0 --device 0 --type hdd --medium $VMPath
+VBoxManage createvm --name $VM --ostype Linux_64 --basefolder /home/student/VirtualBox\ VMs/ --register;
+VBoxManage registervm /home/student/VirtualBox\ VMs/$VM.vbox;
+VBoxManage storagectl $VM --name SATA --add sata --controller IntelAhci --bootable on;
+VBoxManage storageattach $VM --storagectl SATA --port 0 --device 0 --type hdd --medium $VMPath;
 
 # Resource Configuration
 # VM Description
-VBoxManage modifyvm $VM --description \"$DESC\"
+VBoxManage modifyvm $VM --description \"$DESC\";
 
 # Mother Board
-vboxmanage modifyvm $VM --acpi on --ioapic on --vtxux on --chipset piix3
+vboxmanage modifyvm $VM --acpi on --ioapic on --vtxux on --chipset piix3;
 
 # Proccesor, Memory and
-vboxmanage modifyvm $VM --memory 2048 --cpus 2
+vboxmanage modifyvm $VM --memory 2048 --cpus 2;
 
 # Video
-vboxmanage modifyvm $VM --vram 128 --accelerate3d on
+vboxmanage modifyvm $VM --vram 128 --accelerate3d on;
 
 # Audio
-vboxmanage modifyvm $VM --audio alsa --audiocontroller ac97
+vboxmanage modifyvm $VM --audio alsa --audiocontroller ac97;
 
 # Clipboard and File
-vboxmanage modifyvm $VM --clipboard bidirectional --draganddrop bidirectional
+vboxmanage modifyvm $VM --clipboard bidirectional --draganddrop bidirectional;
 
 # Usb and keyboard
-vboxmanage modifyvm $VM --usb on --mouse ps2 --keyboard ps2
+vboxmanage modifyvm $VM --usb on --mouse ps2 --keyboard ps2;
 
 # Connect to nat
-VBoxManage modifyvm $VM --cableconnected2 on --nic2 natnetwork --nat-network MetaNet
+VBoxManage modifyvm $VM --cableconnected2 on --nic2 natnetwork --nat-network MetaNet;
 
 #--------------------------------------------------------------------------------------------
 
 #--------------------------------------------------------------------------------------------
 # BioVagrant
-unzip /home/student/Desktop/143/biovagrant.ova -d /home/student/Documents/VM-images/
-VMPath="/home/student/Documents/VM-images/biovagrant.ova"
-VM="BioVagrant"
-DESC="Virtual machine containing a version of BioVagrant"
+unzip /home/ccom-admin/Desktop/143/biovagrant.ova -d /home/student/Documents/VM-images/;
+VMPath="/home/student/Documents/VM-images/biovagrant.ova";
+VM="BioVagrant";
+DESC="Virtual machine containing a version of BioVagrant";
 
-VBoxManage import $VMPath
-VBoxManage modifyvm $VM --description \"$DESC\"
+VBoxManage import $VMPath;
+VBoxManage modifyvm $VM --description \"$DESC\";
 #--------------------------------------------------------------------------------------------
 
 #--------------------------------------------------------------------------------------------
@@ -421,46 +420,46 @@ VBoxManage modifyvm $VM --description \"$DESC\"
 # http://ccom.uprrp.edu/~rarce/eipgb/chapters/eip-intro/index.html
 # http://eip.ccom.uprrp.edu/vms/eip-ubuntu-qt.tar.gz
 # Using rafav tar file instead of ubuntu qt
-tar xvf /home/student/Desktop/143/eip-rafav.tar.gz -C /home/student/Documents/VM-images
-VMPath='/home/student/Documents/VM-images/EIP-Labs.vmdk'
+tar xvf /home/ccom-admin/Desktop/143/eip-rafav.tar.gz -C /home/student/Documents/VM-images;
+VMPath='/home/student/Documents/VM-images/EIP-Labs.vmdk';
 
 # Create vm
-VM='EIP-Labs'
+VM='EIP-Labs';
 
-DESC="Virtual Machine containing a EIP-Labs excercises for class"
+DESC="Virtual Machine containing a EIP-Labs excercises for class";
 
 # VBoxManage convertfromraw --format vmdk --variant Standard $VMPath.vmdk $VMPath.vdi
-VBoxManage createvm --name $VM --ostype Ubuntu_64 --basefolder /home/student/VirtualBox\ VMs/ --register
-VBoxManage storagectl $VM --name SATA --add sata --controller IntelAhci --bootable on
-VBoxManage storageattach $VM --storagectl SATA --port 0 --device 0 --type hdd --medium $VMPath
+VBoxManage createvm --name $VM --ostype Ubuntu_64 --basefolder /home/student/VirtualBox\ VMs/ --register;
+VBoxManage storagectl $VM --name SATA --add sata --controller IntelAhci --bootable on;
+VBoxManage storageattach $VM --storagectl SATA --port 0 --device 0 --type hdd --medium $VMPath;
 
 # Resource Configuration
 # VM Description
-VBoxManage modifyvm --description \"$DESC\"
+VBoxManage modifyvm --description \"$DESC\";
 
 # Mother Board
-vboxmanage modifyvm $VM --acpi on --ioapic on --vtxux on --chipset piix3
+vboxmanage modifyvm $VM --acpi on --ioapic on --vtxux on --chipset piix3;
 
 # Proccesor, Memory and
-vboxmanage modifyvm $VM --memory 2048 --cpus 2
+vboxmanage modifyvm $VM --memory 2048 --cpus 2;
 
 # Video
-vboxmanage modifyvm $VM --vram 128 --accelerate3d on
+vboxmanage modifyvm $VM --vram 128 --accelerate3d on;
 
 # Audio
-vboxmanage modifyvm $VM --audio alsa --audiocontroller ac97
+vboxmanage modifyvm $VM --audio alsa --audiocontroller ac97;
 
 # Clipboard and File
-vboxmanage modifyvm $VM --clipboard bidirectional --draganddrop bidirectional
+vboxmanage modifyvm $VM --clipboard bidirectional --draganddrop bidirectional;
 
 # Usb and keyboard
-vboxmanage modifyvm $VM --usb on --mouse ps2 --keyboard ps2
+vboxmanage modifyvm $VM --usb on --mouse ps2 --keyboard ps2;
 
 #--------------------------------------------------------------------------------------------
 
 #--------------------------------------------------------------------------------------------
 # Change VM Images Permmisions
-chown -R student:student /home/student/Documents/VM-images/
+chown -R student:student /home/student/Documents/VM-images/;
 #--------------------------------------------------------------------------------------------
 
 #--------------------------------------------------------------------------------------------
@@ -475,6 +474,6 @@ apt autoclean -y && apt autoremove -y;
 
 #--------------------------------------------------------------------------------------------
 # Experimental clenaup
-rm -rf /home/student/Desktop/143
+# rm -rf /home/student/Desktop/143
 #--------------------------------------------------------------------------------------------
-} 2> script_errors.log
+} &2> script_errors.log
