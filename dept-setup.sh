@@ -287,6 +287,16 @@ cd ..
 #--------------------------------------------------------------------------------------------
 
 #--------------------------------------------------------------------------------------------
+# Super Update
+apt update -y && apt upgrade -y;
+#--------------------------------------------------------------------------------------------
+
+#--------------------------------------------------------------------------------------------
+# Super Cleanse
+apt autoclean -y && apt autoremove -y;
+#--------------------------------------------------------------------------------------------
+
+#--------------------------------------------------------------------------------------------
 # Virtual Box 5.1
 apt install -y /home/ccom-admin/Desktop/143/virtualbox_5.0.40-dfsg-0ubuntu1.16.04.1_amd64.deb;
 # Add extension pack
@@ -302,6 +312,20 @@ VBoxManage natnetwork add --netname MetaNet --network "10.0.2.0/24" --enable --d
 #--------------------------------------------------------------------------------------------
 # Make Virtual Machine file directory
 mkdir /home/student/Documents/VM-images;
+tar xvf /home/ccom-admin/Desktop/143/atackpr-camp2017.tar.gz -C /home/student/Documents/VM-images;
+tar xvf /home/ccom-admin/Desktop/143/atackpr-camp-ms-2017.tar.gz -C /home/student/Documents/VM-images;
+unzip /home/ccom-admin/Desktop/143/biovagrant.ova -d /home/student/Documents/VM-images/;
+tar xvf /home/ccom-admin/Desktop/143/eip-rafav.tar.gz -C /home/student/Documents/VM-images;
+#--------------------------------------------------------------------------------------------
+
+#--------------------------------------------------------------------------------------------
+# Change VM Images Permmisions
+chown -R student:student /home/student/Documents/VM-images/;
+#--------------------------------------------------------------------------------------------
+
+#--------------------------------------------------------------------------------------------
+# Change accounts
+sudo -u student bash
 #--------------------------------------------------------------------------------------------
 
 #--------------------------------------------------------------------------------------------
@@ -313,9 +337,8 @@ mkdir /home/student/Documents/VM-images;
 
 # Consider updating to new version
 # http://ccom.uprrp.edu/~jortiz/cyber/hscamp/atackpr-camp2017.tar.gz
-tar xvf /home/ccom-admin/Desktop/143/atackpr-camp2017.tar.gz -C /home/student/Documents/VM-images;
-VMPath='/home/student/Documents/VM-images/atackpr-camp2017.vmdk'
 
+VMPath='/home/student/Documents/VM-images/atackpr-camp2017.vmdk'
 # Create VM
 VM='kali'
 DESC="Virtual Machine containing a custom version of kali with some excersices for class"
@@ -359,7 +382,6 @@ VBoxManage modifyvm $VM --cableconnected2 on --nic2 natnetwork --nat-network Met
 # Metasploitable
 # unzip /home/student/Desktop/143/Metasploitable.vmdk.zip -d /home/student/Documents/VM-images
 # VMPath='/home/student/Documents/VM-images/Metasploitable.vmdk'
-tar xvf /home/ccom-admin/Desktop/143/atackpr-camp-ms-2017.tar.gz -C /home/student/Documents/VM-images;
 
 # Consider using new 2017 Metasploitable vmdk
 # # source http://ccom.uprrp.edu/~jortiz/cyber/hscamp/atackpr-camp-ms-2017.tar.gz
@@ -406,7 +428,7 @@ VBoxManage modifyvm $VM --cableconnected2 on --nic2 natnetwork --nat-network Met
 
 #--------------------------------------------------------------------------------------------
 # BioVagrant
-unzip /home/ccom-admin/Desktop/143/biovagrant.ova -d /home/student/Documents/VM-images/;
+
 VMPath="/home/student/Documents/VM-images/biovagrant.ova";
 VM="BioVagrant";
 DESC="Virtual machine containing a version of BioVagrant";
@@ -421,7 +443,6 @@ VBoxManage modifyvm $VM --description \"$DESC\";
 # http://ccom.uprrp.edu/~rarce/eipgb/chapters/eip-intro/index.html
 # http://eip.ccom.uprrp.edu/vms/eip-ubuntu-qt.tar.gz
 # Using rafav tar file instead of ubuntu qt
-tar xvf /home/ccom-admin/Desktop/143/eip-rafav.tar.gz -C /home/student/Documents/VM-images;
 VMPath='/home/student/Documents/VM-images/EIP-Labs.vmdk';
 
 # Create vm
@@ -459,18 +480,8 @@ vboxmanage modifyvm $VM --usb on --mouse ps2 --keyboard ps2;
 #--------------------------------------------------------------------------------------------
 
 #--------------------------------------------------------------------------------------------
-# Change VM Images Permmisions
-chown -R student:student /home/student/Documents/VM-images/;
-#--------------------------------------------------------------------------------------------
-
-#--------------------------------------------------------------------------------------------
-# Super Update
-apt update -y && apt upgrade -y;
-#--------------------------------------------------------------------------------------------
-
-#--------------------------------------------------------------------------------------------
-# Super Cleanse
-apt autoclean -y && apt autoremove -y;
+# exit studen account
+EOF
 #--------------------------------------------------------------------------------------------
 
 #--------------------------------------------------------------------------------------------
