@@ -97,8 +97,9 @@ apt install -y /home/ccom-admin/Desktop/143/sublime-text_build-3126_amd64.deb;
 # Java Install
 
 # From deb:
-apt install -y /home/ccom-admin/Desktop/143/openjdk-9-jdk_9~b114-0ubuntu1_amd64.deb
-/home/ccom-admin/Desktop/143/openjdk-9-jre_9~b114-0ubuntu1_amd64.deb
+apt install -y /home/ccom-admin/Desktop/143/default-jdk_2%3a1.8-56ubuntu2_amd64.deb;
+apt install -y /home/ccom-admin/Desktop/143/default-jre_2%3a1.8-56ubuntu2_amd64.deb;
+
 # From source:
 # tar xvf /home/student/Desktop/143/jre-8u121-linux-x64.tar.gz
 # mkdir -p /usr/lib/jvm
